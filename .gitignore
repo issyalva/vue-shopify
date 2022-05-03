@@ -1,0 +1,24 @@
+# ignore all files starting with . or ~
+.*
+~*
+
+/node_modules
+/config.yml
+/config/settings_data.json
+
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# track these files, if they exist
+!.gitignore
+!.editorconfig
+!README.md
+!CHANGELOG.md
+!composer.json
