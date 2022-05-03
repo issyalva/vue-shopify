@@ -1,0 +1,22 @@
+<div class="hero-image section">
+  <img src="{{ section.settings.image | img_url: 'master' }}">
+</div>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Home Page"
+    }
+  ]
+}
+{% endschema %}

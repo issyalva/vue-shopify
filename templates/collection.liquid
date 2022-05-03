@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="collection">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    {% render 'product-card' for collection.products as product %} 
+  </div>
+</div>  
