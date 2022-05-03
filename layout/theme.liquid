@@ -8,9 +8,12 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }} <!-- Header hook for plugins -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/vue@3"></script>
   {% comment %} <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.prod.js"></script> {% endcomment %}
-  {{ 'application.css' | asset_url | stylesheet_tag }}
+  {{ 'application.scss.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
 </head>
 <body>
@@ -20,5 +23,8 @@
   <main role="main">
     {{ content_for_layout }}
   </main>
+
+  {% section 'footer'%}
+
 </body>
 </html>
