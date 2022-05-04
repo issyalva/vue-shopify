@@ -1,6 +1,6 @@
 <header class="header" id="header">
   <div class="header-inner flex space-between">
- 
+
     {% unless template == "product" %}
     <button class="menu-button" @click="toggleMenu">
       <svg class="menu-arrow-icon">{% render 'header-arrow' %}</svg>
@@ -14,23 +14,36 @@
     {% endunless %}
 
     <a href="/" class="header-title">{{ shop.name }}</a>
-    
+
     <div class="cart-button-container" @click="toggleMiniCart">
       <button class="cart-button">
         <span>
-          <template v-if="cart">  
-            Cart ( ${cart.item_count})
+          <template v-if="cart">
+            Cart (${cart.item_count})
           </template>
         </span>
+        <svg class="cart-arrow-icon">{% render 'header-arrow' %}</svg>
       </button>
     </div>
   </div>
 
-  <div class="menu-drawer" :class="{hidden: menuDrawer }">
+  <div class="header-mobile">
+    <a href="/" class="header-title">{{ shop.name }}</a>
+    <div class="mobile-nav">
+      <button class="mobile-nav-button" @click="toggleMenu">
+        <span>Menu</span>
+      </button>
+      <button class="mobile-nav-button" @click="toggleMiniCart">
+        <span>Cart</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-drawer" :class="{ hidden: menuDrawer }">
     {% render 'menu-drawer' %}
   </div>
 
-  <div class="mini-cart" :class="{hidden: miniCart }">
+  <div class="mini-cart" :class="{ hidden: miniCart }">
     <button class="mini-cart-close-button" @click="toggleMiniCart">Close</button>
     {% render 'mini-cart' %}
   </div>
@@ -53,10 +66,13 @@ if ( document.querySelector('#header') ) {
       toggleMiniCart() {
         toggleMiniCart.openCart()
       },
+      toggleMenu() {
+        toggleMenu.openMenu()
+      },
       closeAllDrawers() {
         toggleClose.closeAll()
       },
-      decrement(item) {
+      decrement(item) { 
         const data = {
           "id": item.key,
           "quantity": item.quantity - 1
@@ -81,9 +97,6 @@ if ( document.querySelector('#header') ) {
       money(value) {
         if (!value) return 0
         return "$" + (value/100).toFixed(2)
-      },
-      toggleMenu() {
-        toggleMenu.openMenu()
       }
     },
     computed: {

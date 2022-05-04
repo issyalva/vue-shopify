@@ -11,9 +11,10 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/vue@3"></script>
-  {% comment %} <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.prod.js"></script> {% endcomment %}
-  {{ 'application.scss.css' | asset_url | stylesheet_tag }}
+  {% comment %} <script src="https://unpkg.com/vue@3"></script> {% endcomment %}
+  <script src="https://unpkg.com/vue@3.0.5/dist/vue.global.prod.js"></script>
+  {% comment %} {{ 'application.scss.css' | asset_url | stylesheet_tag }} {% endcomment %}
+  {{ 'application.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
 </head>
 <body>
@@ -24,7 +25,7 @@
     {{ content_for_layout }}
   </main>
 
-  {% comment %} {% section 'footer'%} {% endcomment %}
+  {% section 'footer'%}
 
 </body>
 </html>
