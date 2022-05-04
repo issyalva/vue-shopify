@@ -18,13 +18,13 @@
 </head>
 <body>
 
-  {% section 'header' %}
+  {% render 'header' %}
 
   <main role="main">
     {{ content_for_layout }}
   </main>
 
-  {% section 'footer'%}
+  {% comment %} {% section 'footer'%} {% endcomment %}
 
 </body>
 </html>

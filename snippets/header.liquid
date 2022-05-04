@@ -1,0 +1,69 @@
+<header class="header" id="header">
+  <div class="header-inner flex space-between">
+
+    <button class="menu-button" @click="toggleMenu">
+      <span>Menu</span>
+    </button> 
+
+    <a href="/" class="header-title">{{ shop.name }}</a>
+
+    <div class="cart-button-container" @click="toggleMiniCart">
+      <button class="cart-button">
+        <span>
+          <template v-if="cart">  
+            Cart ( ${cart.item_count})
+          </template>
+        </span>
+      </button>
+    </div>
+
+    <div class="menu-drawer" :class="{hidden: menuDrawer }">
+    
+    </div>
+
+    <div class="mini-cart" :class="{hidden: miniCart }">
+      {% render 'mini-cart' %}
+    </div>
+
+  </div>
+  
+</header>
+
+<script>
+
+//console.log(store.state.cartState)
+
+if ( document.querySelector('#header') ) {
+  const headerCart = Vue.createApp({
+    delimiters: ['${','}'],
+    data() {
+      return {
+        cartData: store.state.cartState
+      }
+    },
+    methods: {
+      toggleMiniCart() {
+        toggleMiniCart.openCart()
+      },
+      toggleMenu() {
+        toggleMenu.openMenu()
+      }
+    },
+    computed: {
+      miniCart() {
+        return miniCartState.hidden
+      },
+      menuDrawer() {
+        return menuState.hidden
+      },
+      cart() {
+        return this.cartData[0]
+      }
+    },
+    created() {
+      store.getCart()
+    }
+  }).mount('#header')
+}
+
+</script>

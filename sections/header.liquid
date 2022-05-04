@@ -26,18 +26,22 @@
 
   <div class="header-inner flex space-between">
   
-    <div class="menu-drawer" style="display:none;">
-
+    <div class="menu-drawer">
+      <button class="menu-button">
+        <span>Menu</span>
+      </button>
     </div>
 
     <a href="/" class="header-title">{{ shop.name }}</a>
 
     <div class="cart-button-container">
-    
+      <button class="cart-button">
+        <span>Cart</span>
+      </button>
     </div>
 
-    <div class="mini-cart" style="display:none;">
-    
+    <div class="mini-cart">
+      {% render 'mini-cart' %}
     </div>
 
   </div>
