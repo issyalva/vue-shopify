@@ -61,6 +61,9 @@
                 console.log(response)
                 store.getCart()
               })
+              .then((response)=> {
+                toggleMiniCart.openCart()
+              })
               .catch(error => {
                 console.log(error)
               })

@@ -1,12 +1,20 @@
 <header class="header" id="header">
   <div class="header-inner flex space-between">
-
+ 
+    {% unless template == "product" %}
     <button class="menu-button" @click="toggleMenu">
+      <svg class="menu-arrow-icon">{% render 'header-arrow' %}</svg>
       <span>Menu</span>
-    </button> 
+    </button>
+    {% else %}
+    <a href="javascript:history.back()" class="menu-button">
+      <svg class="menu-arrow-icon" style="transform: none;">{% render 'header-arrow' %}</svg>
+      <span>Back</span>
+    </a>
+    {% endunless %}
 
     <a href="/" class="header-title">{{ shop.name }}</a>
-
+    
     <div class="cart-button-container" @click="toggleMiniCart">
       <button class="cart-button">
         <span>
@@ -16,17 +24,17 @@
         </span>
       </button>
     </div>
-
-    <div class="menu-drawer" :class="{hidden: menuDrawer }">
-    
-    </div>
-
-    <div class="mini-cart" :class="{hidden: miniCart }">
-      {% render 'mini-cart' %}
-    </div>
-
   </div>
-  
+
+  <div class="menu-drawer" :class="{hidden: menuDrawer }">
+    {% render 'menu-drawer' %}
+  </div>
+
+  <div class="mini-cart" :class="{hidden: miniCart }">
+    <button class="mini-cart-close-button" @click="toggleMiniCart">Close</button>
+    {% render 'mini-cart' %}
+  </div>
+  <div class="outside" v-if="!miniCart || !menuDrawer" @click="closeAllDrawers"></div>
 </header>
 
 <script>
@@ -44,6 +52,35 @@ if ( document.querySelector('#header') ) {
     methods: {
       toggleMiniCart() {
         toggleMiniCart.openCart()
+      },
+      closeAllDrawers() {
+        toggleClose.closeAll()
+      },
+      decrement(item) {
+        const data = {
+          "id": item.key,
+          "quantity": item.quantity - 1
+        }
+        axios.post('/cart/change.js', data)
+          .then(response => {
+            store.getCart()
+          })
+          .catch( error => console.log(error))
+      },
+      increment(item) {
+        const data = {
+          "id": item.key,
+          "quantity": item.quantity + 1
+        }
+        axios.post('/cart/change.js', data)
+          .then(response => {
+            store.getCart()
+          })
+          .catch( error => console.log(error))
+      },
+      money(value) {
+        if (!value) return 0
+        return "$" + (value/100).toFixed(2)
       },
       toggleMenu() {
         toggleMenu.openMenu()
